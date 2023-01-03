@@ -8,3 +8,10 @@ Lo mas recomendable es crear un ambiente virtual para eso se debe ejecutar el si
 ```sh
   $ python -m venv venv
 ```
+
+Or in linux:
+```sh
+  $ python3 -m venv .venv
+```
+List of dependencies/libraries:
+- dotenv python
