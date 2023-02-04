@@ -1,5 +1,5 @@
 
-from shared.errors import ResourceNotFoundException
+from src.shared.errors import ResourceNotFoundException
 
 
 class UserNotFoundException(ResourceNotFoundException):

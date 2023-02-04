@@ -6,8 +6,6 @@ from configs.MongoDB import get_db_connection
 from User.Infrastructure.UserRouter import UserRouter
 from shared.errors import *
 import uvicorn
-from dotenv import load_dotenv
-import os
 
 app = FastAPI()
 
@@ -41,4 +39,5 @@ async def repository_error_handler(request: Request, exc: RepositoryError) -> JS
 
 
 if __name__ == "__main__":
+    print("QUESO")
     uvicorn.run(app, host="localhost", port=3400)

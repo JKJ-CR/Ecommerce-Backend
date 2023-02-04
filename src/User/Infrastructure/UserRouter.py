@@ -14,10 +14,11 @@ UserRouter = APIRouter(
 def login():
     return {"username": "test", "password": "test"}
 
-@UserRouter.post("/login",
+@UserRouter.post(
+    "/login",
 response_model=bool)
 def login(
     request:CredentialsDTO,
     service:UserService = Depends(lambda:di[UserService])
     )-> bool:
-    return UserService.login(request)
+    return service.login(request)

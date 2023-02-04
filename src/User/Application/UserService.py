@@ -1,6 +1,6 @@
-
 from src.User.Application.UserDTO import CredentialsDTO
 from src.User.Domain.IUserRepository import IUserRepository
+
 class UserService:
     def __init__(
         self,
@@ -10,4 +10,4 @@ class UserService:
 
     def login(self, imputDTO:CredentialsDTO)->bool:
         user = self.user_repo.get_user(imputDTO.email) # retrieves the user data
-        return user.login(imputDTO.password)
+        return user.login(imputDTO.email,imputDTO.password)
