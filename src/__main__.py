@@ -1,11 +1,10 @@
+import uvicorn
 from fastapi import FastAPI
 from fastapi.requests import Request
 from fastapi.responses import JSONResponse
-from configs.MongoDB import get_db_connection
 
-from User.Infrastructure.UserRouter import UserRouter
-from shared.errors import *
-import uvicorn
+from src.User.Infrastructure.UserRouter import UserRouter
+from src.shared.errors import *
 
 app = FastAPI()
 
