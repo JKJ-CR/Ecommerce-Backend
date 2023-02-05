@@ -1,3 +1,4 @@
+import os
 import uvicorn
 from fastapi import FastAPI
 from fastapi.requests import Request
@@ -38,5 +39,6 @@ async def repository_error_handler(request: Request, exc: RepositoryError) -> JS
 
 
 if __name__ == "__main__":
-    print("QUESO")
-    uvicorn.run(app, host="localhost", port=3400)
+    ADDRESS = os.getenv("DOCKER_ADDRESS")
+    print(ADDRESS)
+    uvicorn.run(app, host=ADDRESS, port=15400)
