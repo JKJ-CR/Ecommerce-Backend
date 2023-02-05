@@ -1,7 +1,6 @@
 import os
+
 from pymongo import MongoClient
-
-
 
 
 def get_db_connection():# return a connection to the mongodb database

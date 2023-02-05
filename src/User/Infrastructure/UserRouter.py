@@ -1,7 +1,8 @@
-from fastapi import APIRouter,Depends
+from fastapi import APIRouter, Depends
+from kink import di
+
 from src.User.Application.UserDTO import CredentialsDTO
 from src.User.Application.UserService import UserService
-from kink import di
 
 UserRouter = APIRouter(
     prefix="/users",

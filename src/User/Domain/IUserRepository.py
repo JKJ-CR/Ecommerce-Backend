@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-import User
+from src.User.Domain.User import User
 
 
 class IUserRepository(ABC):#This Interface will be later overloaded with an implementation of the Infrastructure layer
