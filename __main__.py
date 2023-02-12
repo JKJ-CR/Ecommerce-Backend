@@ -5,7 +5,7 @@ from fastapi.requests import Request
 from fastapi.responses import JSONResponse
 
 from src.User.Infrastructure.UserRouter import UserRouter
-from src.shared.errors import *
+from src.shared.Errors import *
 
 app = FastAPI()
 
@@ -40,5 +40,10 @@ async def repository_error_handler(request: Request, exc: RepositoryError) -> JS
 
 if __name__ == "__main__":
     ADDRESS = os.getenv("DOCKER_ADDRESS")
+    PORT = os.getenv("DOCKER_PORT")
+    if ADDRESS is None:
+        ADDRESS = "localhost"
+    if PORT is None:
+        PORT = 3400
     print(ADDRESS)
-    uvicorn.run(app, host=ADDRESS, port=15400)
+    uvicorn.run(app, host=ADDRESS, port=PORT) 

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from kink import di
+from fastapi.responses import JSONResponse
 
 from src.User.Application.UserDTO import CredentialsDTO
 from src.User.Application.UserService import UserService
@@ -21,5 +22,6 @@ response_model=bool)
 def login(
     request:CredentialsDTO,
     service:UserService = Depends(lambda:di[UserService])
-    )-> bool:
-    return service.login(request)
+    )-> JSONResponse:
+    message = "Success" if service.login(request) else "Failure"
+    return JSONResponse(status_code=200, content={"message": message})

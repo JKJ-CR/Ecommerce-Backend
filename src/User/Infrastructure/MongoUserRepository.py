@@ -6,7 +6,7 @@ from pymongo.errors import PyMongoError
 from src.User.Domain.IUserRepository import IUserRepository
 from src.User.Domain.User import User
 from src.User.Domain.UserErrors import UserNotFoundException
-from src.shared.errors import RepositoryError
+from src.shared.Errors import RepositoryError
 
 MongoDocument = Mapping[str, Any]  # Defined just to make easier the understanding of some annotations
 
@@ -33,7 +33,7 @@ class MongoUserRepository(IUserRepository):
                 raise UserNotFoundException(f"User with email: {email} was not found")
 
         except PyMongoError as error:
-
+            print(error)
             raise RepositoryError.get_operation_failed()
 
         return self.to_entity(document)

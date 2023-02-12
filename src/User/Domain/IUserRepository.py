@@ -8,3 +8,4 @@ class IUserRepository(ABC):#This Interface will be later overloaded with an impl
     @abstractmethod #Decorator
     def get_user(self, email:str)->User: # Retrieves the user based on the email
         pass
+
