@@ -1,10 +1,13 @@
+import os
 from fastapi import APIRouter, Depends
 from kink import di
 from fastapi.responses import JSONResponse
 
 from src.User.Application.UserDTO import CredentialsDTO
 from src.User.Application.UserService import UserService
+from src.shared.ILogger import ILogger
 
+verbose = os.getenv('VERBOSE')
 UserRouter = APIRouter(
     prefix="/users",
     tags=["users"]
@@ -14,14 +17,31 @@ UserRouter = APIRouter(
 
 @UserRouter.get("/")# Call the definition of the user Router and the HTTP method GET
 def login():
-    return {"username": "test", "password": "test"}
+    '''Dummy function to check the status of the user router
+
+    Returns:
+        _type_: a JSON response 
+    '''
+    return JSONResponse(status_code=200, content ={"username": "test", "password": "test"})
 
 @UserRouter.post(
     "/login",
 response_model=bool)
 def login(
     request:CredentialsDTO,
-    service:UserService = Depends(lambda:di[UserService])
+    service:UserService = Depends(lambda:di[UserService]),
+    logger:ILogger = Depends(lambda:di[ILogger])
     )-> JSONResponse:
+    '''A simple router function that calls the UserService 
+
+    Args:
+        request (CredentialsDTO): _description_
+        service (_type_, optional): _description_. Defaults to Depends(lambda:di[UserService]).
+
+    Returns:
+        JSONResponse: _description_
+    '''
     message = "Success" if service.login(request) else "Failure"
+    if verbose:
+        logger.log_info("ROUTER: "+ message)
     return JSONResponse(status_code=200, content={"message": message})

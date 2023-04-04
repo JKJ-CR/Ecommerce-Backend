@@ -4,9 +4,18 @@ from src.User.Application.UserService import UserService
 from src.User.Domain.IUserRepository import IUserRepository
 from src.User.Infrastructure.MongoUserRepository import MongoUserRepository
 from src.configs.MongoDB import get_db_connection
+from src.shared.LocalLogger import LocalLogger
+import os
+
+from src.shared.ILogger import ILogger
 
 
 def UserDI()->None:
     repository = MongoUserRepository( get_db_connection() )
+    logger = LocalLogger()
+    di[ILogger] = logger
+    VERBOSE = os.getenv("VERBOSE")
+    print(VERBOSE)
     di[IUserRepository] =repository
-    di[UserService] = UserService(repository)
+    di[UserService] = UserService(repository,logger,VERBOSE )
+    
