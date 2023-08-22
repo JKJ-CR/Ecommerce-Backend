@@ -24,9 +24,7 @@ def login():
     '''
     return JSONResponse(status_code=200, content ={"username": "test", "password": "test"})
 
-@UserRouter.post(
-    "/login",
-response_model=bool)
+@UserRouter.post("/login")
 def login(
     request:CredentialsDTO,
     service:UserService = Depends(lambda:di[UserService]),

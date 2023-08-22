@@ -19,11 +19,11 @@ class UserService:
         try:
             user = self.user_repo.get_user(imputDTO.email) # retrieves the user data
             if self.verbose:
-                self.logger.log_info("APP: "+"User found in the database")
+                self.logger.log_info("Router: "+"User found in the database")
 
         except UserNotFoundException:
             if self.verbose:
-                self.logger.log_error("APP: " +"User not found")
+                self.logger.log_error("Router: " +"User not found")
             return False
             
         return user.login(imputDTO.email,imputDTO.password)

@@ -13,7 +13,6 @@ from src.shared.ILogger import ILogger
 def UserDI()->None:
     repository = MongoUserRepository( get_db_connection() )
     logger = LocalLogger()
-    di[ILogger] = logger
     VERBOSE = os.getenv("VERBOSE")
     print(VERBOSE)
     di[IUserRepository] =repository

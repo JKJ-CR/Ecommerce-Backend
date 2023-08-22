@@ -132,3 +132,8 @@ __pycache__
 
 #custom ignore
 *.log
+src/__main__.py~Stashed changes
+
+*.py~Updated upstream
+
+*.py~Stashed changes

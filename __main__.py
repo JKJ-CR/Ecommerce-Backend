@@ -1,9 +1,12 @@
 import os
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI , status
 from fastapi.requests import Request
+
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
+from src.Product.Infrastructure.ProductRouter import ProductRouter
 
 from src.User.Infrastructure.UserRouter import UserRouter
 from src.shared.Errors import *
@@ -24,6 +27,7 @@ app.add_middleware(
 )
 
 app.include_router(UserRouter)
+app.include_router(ProductRouter)
 
 
 @app.exception_handler(DomainException)
@@ -49,6 +53,10 @@ async def repository_error_handler(request: Request, exc: RepositoryError) -> JS
         status_code=500,
         content=error_msg.dict(),
     )
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
+    error_msg = APIErrorMessage(type=exc.__class__.__name__, message=str(exc))
+    return JSONResponse(status_code=400, content=error_msg.dict())
 
 
 if __name__ == "__main__":
