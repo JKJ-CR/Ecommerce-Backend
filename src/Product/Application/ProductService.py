@@ -24,3 +24,14 @@ class ProductService:
                 self.logger.log_error("Service: "+"Products not found")
             return []
         return products
+    
+    def get_product(self, product_id : str):
+        try:
+            product = self.product_repo.get_product(product_id)
+            if self.verbose:
+                self.logger.log_info("Service: "+"Product with id: " + product_id + " found in the database")
+        except ProductNotFoundException:
+            if self.verbose:
+                self.logger.log_error("Service: "+"Product not found")
+            return []
+        return product

@@ -12,5 +12,13 @@ class DummyProductRepository(IProductRepository):
         except Exception:
             r = []
         return r.json()
+    
+    def get_product(self, product_id:str):
+        try:
+            r = requests.get(f'https://dummyjson.com/products/{product_id}')
+        except Exception:
+            r = []
+        return r.json()
+        
         
 
